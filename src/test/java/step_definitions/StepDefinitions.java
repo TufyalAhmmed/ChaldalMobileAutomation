@@ -22,7 +22,7 @@ public class StepDefinitions {
     BasePage base = new BasePage();
 
     @Given("Search for the item toothbrush")
-    public void searchForTheItemToothbrush() {
+    public void searchForTheItemToothbrush() throws InterruptedException {
         By allowButton = By.xpath("//android.widget.Button[@text='While using the app']");
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         try {
@@ -38,6 +38,10 @@ public class StepDefinitions {
         base.click_on(By.xpath(PageObjects.Search_Button_xpath));
         base.wait_for_clickable_of(By.xpath(PageObjects.Search_Products_Input_xpath));
         base.sendKeysToElement(By.xpath(PageObjects.Search_Products_Input_xpath), "toothbrush");
+        Thread.sleep(2000);
+        getDriver().hideKeyboard();
+        Thread.sleep(3000);
+
 
     }
 
@@ -49,14 +53,11 @@ public class StepDefinitions {
 
     @And("Click the Plus icon three times to add to the cart")
     public void clickThePlusIconThreeTimesToAddToTheCart() throws InterruptedException {
-        Thread.sleep(5000);
-        base.wait_for_clickable_of(By.xpath(PageObjects.Add_Button_xpath));
+        Thread.sleep(3000);
         base.click_on(By.xpath(PageObjects.Add_Button_xpath));
-        Thread.sleep(2000);
-        base.wait_for_clickable_of(By.xpath(PageObjects.Add_Button_xpath));
+        Thread.sleep(1000);
         base.click_on(By.xpath(PageObjects.Add_Button_xpath));
-        Thread.sleep(2000);
-        base.wait_for_clickable_of(By.xpath(PageObjects.Add_Button_xpath));
+        Thread.sleep(1000);
         base.click_on(By.xpath(PageObjects.Add_Button_xpath));
 
     }

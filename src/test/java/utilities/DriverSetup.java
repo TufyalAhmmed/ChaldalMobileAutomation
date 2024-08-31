@@ -1,4 +1,5 @@
 package utilities;
+
 import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
@@ -11,17 +12,18 @@ import java.net.URL;
 import java.time.Duration;
 
 
-
 public class DriverSetup {
     private static ResourceUtils resource = new ResourceUtils().getResource("config");
     private static final ThreadLocal<AndroidDriver> LOCAL_DRIVER = new ThreadLocal<>();
 
-    public static void setDriver(AndroidDriver driver){
+    public static void setDriver(AndroidDriver driver) {
         DriverSetup.LOCAL_DRIVER.set(driver);
     }
-    public static AndroidDriver getDriver(){
+
+    public static AndroidDriver getDriver() {
         return LOCAL_DRIVER.get();
     }
+
     public static AndroidDriver setAPK() throws MalformedURLException {
         File f = new File("src/test/resources/APK");
         File fs = new File(f, resource.getString("apk"));
@@ -43,20 +45,19 @@ public class DriverSetup {
         setDriver(driver);
     }
 
-//    public static synchronized void quiteAndroidDriver(Scenario scenario){
+    //    public static synchronized void quiteAndroidDriver(Scenario scenario){
 //        takeScreenShot(scenario);
 ////        getDriver().removeApp(resource.getString("appPackage"));
 //    }
-public static synchronized void quiteAndroidDriver(){
-//    takeScreenShot();
-//        getDriver().removeApp(resource.getString("appPackage"));
-//    getDriver().quit();
-}
+    public static synchronized void quiteAndroidDriver() {
+        getDriver().removeApp(resource.getString("appPackage"));
+        getDriver().quit();
+    }
 
-    public static void takeScreenShot(Scenario scenario){
-        if (scenario.isFailed()){
+    public static void takeScreenShot(Scenario scenario) {
+        if (scenario.isFailed()) {
             String name = scenario.getName().replaceAll(" ", "_");
-            byte[] source = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BYTES);
+            byte[] source = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(source, "image/png", name);
         }
     }
