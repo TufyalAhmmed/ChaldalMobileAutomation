@@ -50,17 +50,14 @@ public class StepDefinitions {
     @And("Click the Plus icon three times to add to the cart")
     public void clickThePlusIconThreeTimesToAddToTheCart() throws InterruptedException {
         Thread.sleep(5000);
-        base.wait_for_clickable_of(By.xpath(PageObjects.Item_Toothbrush_xpath));
-        base.click_on(By.xpath(PageObjects.Item_Toothbrush_xpath));
-        Thread.sleep(5000);
-        base.clickByCoordinates(1326, 1677);
-        Thread.sleep(5000);
-        base.clickByCoordinates(1326, 1677);
-        Thread.sleep(5000);
-        base.clickByCoordinates(1326, 1677);
-        Thread.sleep(5000);
-        base.clickByCoordinates(92, 179);
-        Thread.sleep(1000);
+        base.wait_for_clickable_of(By.xpath(PageObjects.Add_Button_xpath));
+        base.click_on(By.xpath(PageObjects.Add_Button_xpath));
+        Thread.sleep(2000);
+        base.wait_for_clickable_of(By.xpath(PageObjects.Add_Button_xpath));
+        base.click_on(By.xpath(PageObjects.Add_Button_xpath));
+        Thread.sleep(2000);
+        base.wait_for_clickable_of(By.xpath(PageObjects.Add_Button_xpath));
+        base.click_on(By.xpath(PageObjects.Add_Button_xpath));
 
     }
 
@@ -68,25 +65,31 @@ public class StepDefinitions {
     public void goToTheCartScreenFromTheTop() throws InterruptedException {
 
         Thread.sleep(5000);
-        base.clickByCoordinates(1227, 197);
+        base.wait_for_clickable_of(By.xpath(PageObjects.Checkout_Button_xpath));
+        base.click_on(By.xpath(PageObjects.Checkout_Button_xpath));
     }
 
     @And("Click the Minus icon to empty the card")
     public void clickTheMinusIconToEmptyTheCard() throws InterruptedException {
         Thread.sleep(5000);
-        base.clickByCoordinates(1091, 777);
-        Thread.sleep(5000);
-        base.clickByCoordinates(1091, 777);
-        Thread.sleep(5000);
-        base.clickByCoordinates(1091, 777);
-        Thread.sleep(3000);
+        base.wait_for_clickable_of(By.xpath(PageObjects.minas_Button_xpath));
+        base.click_on(By.xpath(PageObjects.minas_Button_xpath));
+        Thread.sleep(2000);
+        base.wait_for_clickable_of(By.xpath(PageObjects.minas_Button_xpath));
+        base.click_on(By.xpath(PageObjects.minas_Button_xpath));
+        Thread.sleep(2000);
+        base.wait_for_clickable_of(By.xpath(PageObjects.minas_Button_xpath));
+        base.click_on(By.xpath(PageObjects.minas_Button_xpath));
     }
 
     @Then("Verify Text Nothing to see here on cart screen after removing items")
-    public void verifyTextNothingToSeeHereOnCartScreenAfterRemovingItems() {
+    public void verifyTextNothingToSeeHereOnCartScreenAfterRemovingItems() throws InterruptedException {
+        Thread.sleep(2000);
         base.wait_for_existence_of(By.xpath(PageObjects.Nothing_to_see_message_xpath));
         String expectedMessage = "Nothing to see here";
+        Thread.sleep(2000);
         String finalMessage = base.get_text_of(By.xpath(PageObjects.Nothing_to_see_message_xpath));
+        Thread.sleep(2000);
         Assert.assertEquals(finalMessage, expectedMessage, "The message does not match!");
     }
 }
