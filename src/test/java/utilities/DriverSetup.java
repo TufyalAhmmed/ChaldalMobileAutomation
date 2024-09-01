@@ -33,8 +33,8 @@ public class DriverSetup {
         cap.setCapability("deviceName", resource.getString("deviceName"));
         cap.setCapability("udid", resource.getString("udid"));
         cap.setCapability("app", fs.getAbsolutePath());
-//        cap.setCapability("appPackage","");
-//        cap.setCapability("appActivity","");
+//        cap.setCapability("appPackage","appPackage");
+//        cap.setCapability("appActivity","appActivity");
         return new AndroidDriver(new URL("http://127.0.0.1:4723/"), cap);
 
     }
